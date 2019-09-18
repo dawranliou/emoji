@@ -6,7 +6,7 @@
 (def emojis (->
              (client/get "https://raw.githubusercontent.com/omnidan/node-emoji/master/lib/emoji.json")
              :body
-             (json/read-str)
+             (json/read-str :key-fn keyword)
              (into {})))
 
 (def sorted-emojis
