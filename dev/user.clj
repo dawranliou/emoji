@@ -9,4 +9,9 @@
              (json/read-str)
              (into {})))
 
-(spit "resources/emoji.edn" emojis)
+(def sorted-emojis
+  (into (sorted-map-by (fn [k1 k2] (compare [(get emojis k1) k1] [(get emojis k2) k2]))) emojis))
+
+(comment
+  (spit "resources/emoji.edn" sorted-emojis)
+  (take 10 sorted-emojis))
