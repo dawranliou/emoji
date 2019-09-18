@@ -6,3 +6,6 @@ pom:
 
 deploy-clojars:
 	mvn deploy:deploy-file -Dfile=target/emoji.jar -DrepositoryId=clojars -Durl=https://clojars.org/repo -DpomFile=pom.xml
+
+test:
+	clj -A:test -A:runner
