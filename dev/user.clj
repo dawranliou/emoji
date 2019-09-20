@@ -1,17 +1,18 @@
-(ns user)
+(ns user
+  (:require [clojure.java.io :as io]
+            [clojure.data.json :as json]))
 
-(require '[clj-http.client :as client])
-(require '[clojure.data.json :as json])
+(def emojis
+  (with-open [r (io/reader (io/resource "emojis.json"))]
+    (-> (json/read r :key-fn keyword))))
 
-(def emojis (->
-             (client/get "https://raw.githubusercontent.com/omnidan/node-emoji/master/lib/emoji.json")
-             :body
-             (json/read-str :key-fn keyword)
-             (into {})))
-
-(def sorted-emojis
-  (into (sorted-map-by (fn [k1 k2] (compare [(get emojis k1) k1] [(get emojis k2) k2]))) emojis))
+(->> emojis
+     (map (juxt :emoji :aliases))
+     (mapcat (fn [[emoji aliases]] (map (fn [alias] [alias emoji]) aliases))))
 
 (comment
-  (spit "resources/emoji.edn" sorted-emojis)
-  (take 10 sorted-emojis))
+  ;; some emojis has multiple aliases
+  (->> emojis
+       (group-by #(-> % :aliases count))
+       keys) ;; => (1 2 3 ...)
+  )
