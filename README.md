@@ -16,9 +16,9 @@ Emoji for Clojure
 ;; => "Clojure is awesome :thumbsup:"
 
 
-;; If you want to be really anoyying
-(e/emojify-all "Clojure pizza fire thumbsup smile")
-;; => "Clojure 🍕 🔥 👍 😄"
+;; Emojify everything
+(e/emojify-all "pen pineapple apple pen")
+;; => "pen 🍍 🍎 pen"
 
 ```
 
