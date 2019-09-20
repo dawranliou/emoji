@@ -5,21 +5,26 @@
             [clojure.string :as string]))
 
 (def emojis
-  "Keywordized emoji data from the `emojis.json`"
+  "Keywordized emoji data from the `resources/emojis.json`"
   (with-open [r (io/reader (io/resource "emojis.json"))]
     (-> (json/read r :key-fn keyword))))
 
-(def emoji
-  "Map from `:shortcode` to emoticon"
+(def ^:private shortcode->emoji
+  "Map from `:shortcode` to emoji."
   (->> emojis
-       (map (juxt :emoji :aliases))
+       (map (juxt identity :aliases))
        (mapcat (fn [[emoji aliases]] (map (fn [alias] [(keyword alias) emoji]) aliases)))
        (into {})))
 
 (defn ->emoji
-  "Convert a `shortcode` string to emoji"
+  "Convert a `shortcode` string to emoji unicode.
+
+  ```clojure
+  (->emoji \"thumbsup\")
+  ;; => \"👍\"
+  ```"
   [shortcode]
-  (-> shortcode keyword emoji))
+  (-> shortcode keyword shortcode->emoji :emoji))
 
 (defn emojify
   "Replace emoji shortcodes in a string with unicode codes.
@@ -47,7 +52,5 @@
        (string/join " ")))
 
 (comment
-  (def pattern #"(:\w+:)")
-  (re-find pattern "Clojure :thumbsup:")
-  (string/replace "Clojure :thumbsup:" #"(:)(\w+)(:)" (fn [[_ delimeter_1 alias delimeter_2]] (-> alias ->emoji)))
-  (emojify "Clojure is awesome :+1:"))
+  (def pattern #"(:)([-+\w]+)(:)")
+  (re-find pattern "Clojure :thumbsup:"))
