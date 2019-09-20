@@ -9,8 +9,11 @@ Emoji for Clojure
 ```clojure
 (require '[emoji.core :as e])
 
-(e/->emoji "smile")
-;; => "😄"
+(e/emojify "Clojure is awesome :thumbsup:")
+;; => "Clojure is awesome 👍"
+
+(e/emojify-all "Clojure pizza fire thumbsup smile")
+;; => "Clojure 🍕 🔥 👍 😄"
 ```
 
 ## License
