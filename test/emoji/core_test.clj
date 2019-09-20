@@ -11,3 +11,8 @@
   (testing "keyword to emoji"
     (is (= (emoji/->emoji :smile)
            "😄"))))
+
+(deftest emojify-test
+  (testing "Sentence with emojis"
+    (is (= (emoji/emojify "Clojure is awesome :thumbsup:")
+           "Clojure is awesome 👍"))))
