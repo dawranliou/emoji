@@ -22,11 +22,20 @@
   (-> shortcode keyword emoji))
 
 (defn emojify
+  "Replace emoji aliases in a string with unicode codes.
+
+  ```clojure
+  (emojify \"Clojure is awesome :thumbsup:\")
+  ;; => \"Clojure is awesome 👍\"
+  ```"
   [s]
-  (string/replace s #"(:)([-+\w]+)(:)" (fn [[_ delimeter_1 alias delimeter_2]] (-> alias ->emoji))))
+  (string/replace s
+                  #"(:)([-+\w]+)(:)"
+                  (fn [[_ delimeter_1 alias delimeter_2]] (-> alias ->emoji))))
 
 (comment
   (def pattern #"(:\w+:)")
   (re-find pattern "Clojure :thumbsup:")
   (string/replace "Clojure :thumbsup:" #"(:)(\w+)(:)" (fn [[_ delimeter_1 alias delimeter_2]] (-> alias ->emoji)))
-  (emojify "Clojure is awesome :+1:"))
+  (emojify "Clojure is awesome :+1:")
+  "📧")

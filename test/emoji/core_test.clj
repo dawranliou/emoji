@@ -15,4 +15,6 @@
 (deftest emojify-test
   (testing "Sentence with emojis"
     (is (= (emoji/emojify "Clojure is awesome :thumbsup:")
-           "Clojure is awesome 👍"))))
+           "Clojure is awesome 👍"))
+    (is (= (emoji/emojify "Sending :e-mail:...")
+           "Sending 📧..."))))
