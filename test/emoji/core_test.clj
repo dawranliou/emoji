@@ -18,3 +18,10 @@
   (testing "Regular sentence with no intention to use emoji"
     (is (= (emoji/emojify-all "Sending e-mail with a smile")
            "Sending 📧 with 🅰 😄"))))
+
+(deftest demojify-test
+  (testing "Sentence with uinicode emojis"
+    (is (= (emoji/demojify "Clojure is awesome 👍")
+           "Clojure is awesome :thumbsup:"))
+    (is (= (emoji/demojify "Sending 📧...")
+           "Sending :e-mail:..."))))
