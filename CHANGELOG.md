@@ -2,11 +2,13 @@
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [0.1.4] - 2019-09-20
 ### Added
 - `emoji.core/demojify`
 - `emoji.core/->alias`
 
-## [0.1.3]
+## [0.1.3] - 2019-09-20
 ### Added
 - `emoji.core/emojis`
 - `emoji.core/emojify`
@@ -19,5 +21,6 @@ All notable changes to this project will be documented in this file. This change
 - `emoji.core/emoji`
 - `emoji.core/->emoji`
 
-[Unreleased]: https://github.com/dawran6/emoji/compare/0.1.3...HEAD
+[Unreleased]: https://github.com/dawran6/emoji/compare/0.1.4...HEAD
+[0.1.4]: https://github.com/dawran6/emoji/compare/0.1.3...0.1.4
 [0.1.3]: https://github.com/dawran6/emoji/compare/0.1.2...0.1.3
