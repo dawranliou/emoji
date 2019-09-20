@@ -12,8 +12,14 @@ Emoji for Clojure
 (e/emojify "Clojure is awesome :thumbsup:")
 ;; => "Clojure is awesome 👍"
 
+(e/demojify "Clojure is awesome 👍")
+;; => "Clojure is awesome :thumbsup:"
+
+
+;; If you want to be really anoyying
 (e/emojify-all "Clojure pizza fire thumbsup smile")
 ;; => "Clojure 🍕 🔥 👍 😄"
+
 ```
 
 ## License

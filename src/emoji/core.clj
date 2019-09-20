@@ -82,6 +82,7 @@
     (re-pattern (str "(" regex-str ")"))))
 
 (def ^:private unicode-map
+  "Map from `:emojiChar` keyword to emoji."
   (->> emojis
        (map (juxt identity :emojiChar))
        (map (fn [[emoji unicode]] [(keyword unicode) emoji]))
