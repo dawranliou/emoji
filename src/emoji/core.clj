@@ -22,7 +22,7 @@
   (-> shortcode keyword emoji))
 
 (defn emojify
-  "Replace emoji aliases in a string with unicode codes.
+  "Replace emoji shortcodes in a string with unicode codes.
 
   ```clojure
   (emojify \"Clojure is awesome :thumbsup:\")
@@ -33,9 +33,21 @@
                   #"(:)([-+\w]+)(:)"
                   (fn [[_ delimeter_1 alias delimeter_2]] (-> alias ->emoji))))
 
+(defn emojify-all
+  "Replace every word in a sentence to emoji if it is an alias.
+
+  Be aware. This function might make you very annoying.
+  ```clojure
+  (emojify-all \"Clojure pizza fire thumbsup smile\")
+  ;; => \"Clojure 🍕 🔥 👍 😄\"
+  ```"
+  [s]
+  (->> (string/split s #" ")
+       (map #(or (->emoji %) %))
+       (string/join " ")))
+
 (comment
   (def pattern #"(:\w+:)")
   (re-find pattern "Clojure :thumbsup:")
   (string/replace "Clojure :thumbsup:" #"(:)(\w+)(:)" (fn [[_ delimeter_1 alias delimeter_2]] (-> alias ->emoji)))
-  (emojify "Clojure is awesome :+1:")
-  "📧")
+  (emojify "Clojure is awesome :+1:"))

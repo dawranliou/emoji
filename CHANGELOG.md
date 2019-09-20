@@ -2,8 +2,9 @@
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
 ## [Unreleased]
-### Changed
-- Nope
+### Added
+- `emoji.core/emojify`
+- `emoji.core/emojify-all`
 
 ## 0.1.2 - 2019-09-18
 ### Added
