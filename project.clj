@@ -4,4 +4,8 @@
   :license {:name "MIT"
             :url  "https://github.com/dawran6/emoji/blob/master/LICENSE"}
   :dependencies [[org.clojure/clojure "1.10.1"]
-                 [org.clojure/data.json "0.2.6"]])
+                 [org.clojure/data.json "0.2.6"]]
+  :source-paths ["src"]
+  :profiles
+  {:dev {:dependencies [[criterium "0.4.5"]]
+         :source-paths ["dev"]}})
