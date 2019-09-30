@@ -6,84 +6,75 @@
 ;; alias-map
 (defn alias-map []
   (->> emojis
-       (map (juxt identity :aliases))
-       (mapcat (fn [[emoji aliases]] (map (fn [alias] [(keyword alias) emoji]) aliases)))
+       (mapcat (fn [{:keys [aliases] :as emoji}]
+                 (map (fn [alias] [(keyword alias) emoji]) aliases)))
        (into {})))
 
 (defn alias-map-xf []
-  (into {} (comp
-            (map (juxt :aliases identity))
-            (mapcat (fn [[aliases emoji]]
-                      (map (fn [alias] [(keyword alias) emoji]) aliases))))
+  (into {}
+        (mapcat (fn [{:keys [aliases] :as emoji}]
+                  (map (fn [alias] [(keyword alias) emoji])
+                       aliases)))
         emojis))
 
 ;; unicode-map
 (defn unicode-map []
   (->> emojis
-       (map (juxt identity :emojiChar))
-       (map (fn [[emoji unicode]] [(keyword unicode) emoji]))
+       (map (fn [{:keys [emojiChar] :as emoji}] [(keyword emojiChar) emoji]))
        (into {})))
 
 (defn unicode-map-xf []
-  (into {} (comp
-            (map (juxt identity :emojiChar))
-            (map (fn [[emoji unicode]] [(keyword unicode) emoji])))
+  (into {}
+        (map (fn [{:keys [emojiChar] :as emoji}] [(keyword emojiChar) emoji]))
         emojis))
 
 (comment
+  (= (alias-map) (alias-map-xf))
+  (= (unicode-map) (unicode-map-xf))
+
   (require '[criterium.core :as criterium])
 
   (criterium/quick-bench (alias-map))
 
   "
-Evaluation count : 276 in 6 samples of 46 calls.
-             Execution time mean : 2.476903 ms
-    Execution time std-deviation : 437.895254 µs
-   Execution time lower quantile : 2.188587 ms ( 2.5%)
-   Execution time upper quantile : 3.233494 ms (97.5%)
+Evaluation count : 294 in 6 samples of 49 calls.
+             Execution time mean : 2.148035 ms
+    Execution time std-deviation : 48.784635 µs
+   Execution time lower quantile : 2.090944 ms ( 2.5%)
+   Execution time upper quantile : 2.203614 ms (97.5%)
                    Overhead used : 14.743842 ns
-
-Found 1 outliers in 6 samples (16.6667 %)
-  low-severe	 1 (16.6667 %)
- Variance from outliers : 47.9170 % Variance is moderately inflated by outliers
 "
 
   (criterium/quick-bench (alias-map-xf))
 
   "
-Evaluation count : 288 in 6 samples of 48 calls.
-             Execution time mean : 2.173080 ms
-    Execution time std-deviation : 84.752751 µs
-   Execution time lower quantile : 2.092765 ms ( 2.5%)
-   Execution time upper quantile : 2.306046 ms (97.5%)
+Evaluation count : 336 in 6 samples of 56 calls.
+             Execution time mean : 1.870553 ms
+    Execution time std-deviation : 30.348597 µs
+   Execution time lower quantile : 1.835876 ms ( 2.5%)
+   Execution time upper quantile : 1.913168 ms (97.5%)
                    Overhead used : 14.743842 ns
-
-Found 1 outliers in 6 samples (16.6667 %)
-  low-severe	 1 (16.6667 %)
- Variance from outliers : 13.8889 % Variance is moderately inflated by outliers
 "
 
   (criterium/quick-bench (unicode-map))
-  "
-Evaluation count : 774 in 6 samples of 129 calls.
-             Execution time mean : 776.329331 µs
-    Execution time std-deviation : 28.472004 µs
-   Execution time lower quantile : 753.820225 µs ( 2.5%)
-   Execution time upper quantile : 820.779251 µs (97.5%)
-                   Overhead used : 14.743842 ns
 
-Found 1 outliers in 6 samples (16.6667 %)
-  low-severe	 1 (16.6667 %)
- Variance from outliers : 13.8889 % Variance is moderately inflated by outliers
+  "
+Evaluation count : 894 in 6 samples of 149 calls.
+             Execution time mean : 706.637236 µs
+    Execution time std-deviation : 17.400058 µs
+   Execution time lower quantile : 688.468638 µs ( 2.5%)
+   Execution time upper quantile : 725.721997 µs (97.5%)
+                   Overhead used : 14.743842 ns
 "
 
   (criterium/quick-bench (unicode-map-xf))
+
   "
-Evaluation count : 660 in 6 samples of 110 calls.
-             Execution time mean : 963.803505 µs
-    Execution time std-deviation : 53.873523 µs
-   Execution time lower quantile : 908.428118 µs ( 2.5%)
-   Execution time upper quantile : 1.026342 ms (97.5%)
+Evaluation count : 882 in 6 samples of 147 calls.
+             Execution time mean : 705.239297 µs
+    Execution time std-deviation : 19.030340 µs
+   Execution time lower quantile : 680.384612 µs ( 2.5%)
+   Execution time upper quantile : 721.176868 µs (97.5%)
                    Overhead used : 14.743842 ns
 "
   )

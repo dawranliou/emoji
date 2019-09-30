@@ -11,10 +11,11 @@
 
 (def ^:private alias-map
   "Map from `:alias` to emoji."
-  (->> emojis
-       (map (juxt identity :aliases))
-       (mapcat (fn [[emoji aliases]] (map (fn [alias] [(keyword alias) emoji]) aliases)))
-       (into {})))
+  (into {}
+        (mapcat (fn [{:keys [aliases] :as emoji}]
+                  (map (fn [alias] [(keyword alias) emoji])
+                       aliases)))
+        emojis))
 
 (defn ->emoji
   "Convert a `alias` string to emoji unicode.
@@ -83,10 +84,9 @@
 
 (def ^:private unicode-map
   "Map from `:emojiChar` keyword to emoji."
-  (->> emojis
-       (map (juxt identity :emojiChar))
-       (map (fn [[emoji unicode]] [(keyword unicode) emoji]))
-       (into {})))
+  (into {}
+        (map (fn [{:keys [emojiChar] :as emoji}] [(keyword emojiChar) emoji]))
+        emojis))
 
 (defn ->alias
   "Convert a `unicode` string to emoji shortcode/alias.
