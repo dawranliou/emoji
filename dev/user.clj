@@ -33,30 +33,30 @@
 (comment
   (require '[criterium.core :as criterium])
 
-  (criterium/quick-benchmark* (alias-map))
+  (criterium/quick-bench (alias-map))
 
   "
-Evaluation count : 246 in 6 samples of 41 calls.
-             Execution time mean : 2.592084 ms
-    Execution time std-deviation : 152.224926 µs
-   Execution time lower quantile : 2.345529 ms ( 2.5%)
-   Execution time upper quantile : 2.748554 ms (97.5%)
-                   Overhead used : 10.789885 ns
+Evaluation count : 276 in 6 samples of 46 calls.
+             Execution time mean : 2.476903 ms
+    Execution time std-deviation : 437.895254 µs
+   Execution time lower quantile : 2.188587 ms ( 2.5%)
+   Execution time upper quantile : 3.233494 ms (97.5%)
+                   Overhead used : 14.743842 ns
 
 Found 1 outliers in 6 samples (16.6667 %)
   low-severe	 1 (16.6667 %)
- Variance from outliers : 14.5692 % Variance is moderately inflated by outliers
+ Variance from outliers : 47.9170 % Variance is moderately inflated by outliers
 "
 
   (criterium/quick-bench (alias-map-xf))
 
   "
-Evaluation count : 246 in 6 samples of 41 calls.
-             Execution time mean : 2.737474 ms
-    Execution time std-deviation : 108.781029 µs
-   Execution time lower quantile : 2.624297 ms ( 2.5%)
-   Execution time upper quantile : 2.893353 ms (97.5%)
-                   Overhead used : 10.789885 ns
+Evaluation count : 288 in 6 samples of 48 calls.
+             Execution time mean : 2.173080 ms
+    Execution time std-deviation : 84.752751 µs
+   Execution time lower quantile : 2.092765 ms ( 2.5%)
+   Execution time upper quantile : 2.306046 ms (97.5%)
+                   Overhead used : 14.743842 ns
 
 Found 1 outliers in 6 samples (16.6667 %)
   low-severe	 1 (16.6667 %)
@@ -65,21 +65,25 @@ Found 1 outliers in 6 samples (16.6667 %)
 
   (criterium/quick-bench (unicode-map))
   "
-Evaluation count : 732 in 6 samples of 122 calls.
-             Execution time mean : 821.710403 µs
-    Execution time std-deviation : 22.457106 µs
-   Execution time lower quantile : 787.478180 µs ( 2.5%)
-   Execution time upper quantile : 841.088796 µs (97.5%)
-                   Overhead used : 10.789885 ns
+Evaluation count : 774 in 6 samples of 129 calls.
+             Execution time mean : 776.329331 µs
+    Execution time std-deviation : 28.472004 µs
+   Execution time lower quantile : 753.820225 µs ( 2.5%)
+   Execution time upper quantile : 820.779251 µs (97.5%)
+                   Overhead used : 14.743842 ns
+
+Found 1 outliers in 6 samples (16.6667 %)
+  low-severe	 1 (16.6667 %)
+ Variance from outliers : 13.8889 % Variance is moderately inflated by outliers
 "
 
   (criterium/quick-bench (unicode-map-xf))
   "
-Evaluation count : 558 in 6 samples of 93 calls.
-             Execution time mean : 1.051565 ms
-    Execution time std-deviation : 27.120888 µs
-   Execution time lower quantile : 1.008676 ms ( 2.5%)
-   Execution time upper quantile : 1.076938 ms (97.5%)
-                   Overhead used : 10.789885 ns
+Evaluation count : 660 in 6 samples of 110 calls.
+             Execution time mean : 963.803505 µs
+    Execution time std-deviation : 53.873523 µs
+   Execution time lower quantile : 908.428118 µs ( 2.5%)
+   Execution time upper quantile : 1.026342 ms (97.5%)
+                   Overhead used : 14.743842 ns
 "
   )
