@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file. This change
 
 ## [Unreleased]
 
+## [0.1.5] - 2019-09-30
+- Speed up load time
+
 ## [0.1.4] - 2019-09-20
 ### Added
 - `emoji.core/demojify`
@@ -21,6 +24,7 @@ All notable changes to this project will be documented in this file. This change
 - `emoji.core/emoji`
 - `emoji.core/->emoji`
 
-[Unreleased]: https://github.com/dawran6/emoji/compare/0.1.4...HEAD
+[Unreleased]: https://github.com/dawran6/emoji/compare/0.1.5...HEAD
+[0.1.5]: https://github.com/dawran6/emoji/compare/0.1.4...0.1.5
 [0.1.4]: https://github.com/dawran6/emoji/compare/0.1.3...0.1.4
 [0.1.3]: https://github.com/dawran6/emoji/compare/0.1.2...0.1.3
