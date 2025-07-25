@@ -41,7 +41,9 @@
   [s]
   (string/replace s
                   #"(:)([-+\w]+)(:)"
-                  (fn [[_ delimeter_1 alias delimeter_2]] (-> alias ->emoji))))
+                  (fn [[original _delimeter_1 alias _delimeter_2]]
+                    (let [emoji (-> alias ->emoji)]
+                      (or emoji original)))))
 
 (defn emojify-all
   "Replace every word in a sentence to emoji if it is an alias.

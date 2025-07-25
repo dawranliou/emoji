@@ -14,6 +14,11 @@
     (is (= (emoji/emojify "Sending :e-mail:...")
            "Sending 📧..."))))
 
+(deftest emojify-test-with-invalid-alias-present
+  (testing "Sentence with characters that match the emoji alias pattern but do not represent an emoji"
+    (is (= (emoji/emojify ":package: Package was delivered at 2025-06-26T23:21:00.000Z")
+           "📦 Package was delivered at 2025-06-26T23:21:00.000Z"))))
+
 (deftest emojify-all-test
   (testing "Regular sentence with no intention to use emoji"
     (is (= (emoji/emojify-all "Sending e-mail with a smile")
