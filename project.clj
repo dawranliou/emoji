@@ -1,4 +1,4 @@
-(defproject dawran6/emoji "0.1.5"
+(defproject dawran6/emoji "0.2.0"
   :description "Emoji for Clojure"
   :url "http://github.com/dawran6/emoji"
   :license {:name "MIT"
